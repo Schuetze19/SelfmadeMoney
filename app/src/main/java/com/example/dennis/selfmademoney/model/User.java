@@ -24,6 +24,7 @@ public class User {
     }
 
     public long getId() {
+        // Solange keine Datenbank dahinter ist, wird eine Random id vergeben, die mindestens 11 betagen muss (Siehe createUser von UserDao)
         return id == 0L ? (long)(Math.random()*11) : id;
     }
 
