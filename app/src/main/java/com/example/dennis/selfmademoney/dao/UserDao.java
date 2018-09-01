@@ -29,19 +29,25 @@ public class UserDao implements IRepository<User> {
     @Override
     public User findById(long id) {
         // User mit id X soll zurückgegeben werden.
-        return createUser(id);
+        // Falls die Id > 10 ist, dann wird der User "nicht gefunden" und dementsprechen Null zurückgegeben.
+        return id <= 10 ? createUser(id) : null;
     }
 
     @Override
     public List<User> findAll() {
-        // Alle User sollen zurückgegeben werden.
+        // Alle User sollen zurückgegeben werden. (Aus test zwecken immer 10)
         List<User> userList = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
+        for (int i = 1; i <= 10; i++){
             userList.add(createUser(i));
         }
         return userList;
     }
 
+    /**
+     * Erzeugt einen User mit fiktiven Daten.
+     * @param id Der erzeugte User wird die id erhalten
+     * @return User
+     */
     private User createUser(long id){
         return new User(id, Shuffle.shuffle("John_Test"),Shuffle.shuffle("John_Test@Test.de"),Shuffle.shuffle("password"));
     }
