@@ -2,12 +2,12 @@ package com.example.dennis.selfmademoney.dao;
 
 import com.example.dennis.selfmademoney.model.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class UserDao implements IRepository<User> {
 
-    private final List<User> userList = Arrays.asList(
+    private final ArrayList<User> userList = new ArrayList(Arrays.asList(
             new User(1,"Schuetze19","Schuetze19@yahoo.de","PasswordSchuetze"),
             new User(2,"Bonziller","Bonziller@yahoo.de","PasswordBonziller"),
             new User(3,"MoneyMüller","MoneyMüller@yahoo.de","PasswordMoneyMüller"),
@@ -17,7 +17,7 @@ public class UserDao implements IRepository<User> {
             new User(7,"TopfGold","TopfGold@yahoo.de","PasswordTopfGold"),
             new User(8,"DonaldTrump","DonaldTrump@yahoo.de","PasswordDonaldTrump"),
             new User(9,"GeldMaschine","GeldMaschine@yahoo.de","PasswordGeldMaschine"),
-            new User(10,"AliBaba","AliBaba@yahoo.de","PasswordAliBaba"));
+            new User(10,"AliBaba","AliBaba@yahoo.de","PasswordAliBaba")));
 
     @Override
     public User save(User model) {
@@ -45,7 +45,7 @@ public class UserDao implements IRepository<User> {
     }
 
     @Override
-    public List<User> findAll() {
+    public ArrayList<User> findAll() {
         // Alle User sollen zurückgegeben werden. (Aus test zwecken immer 10)
         return userList;
     }
