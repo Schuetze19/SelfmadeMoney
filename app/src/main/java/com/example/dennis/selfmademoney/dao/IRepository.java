@@ -6,11 +6,18 @@ public interface IRepository<T> {
 
     T save(T model);
     T update(T model);
+
+    /**
+     * Dient zum löschen eines Models.
+     * Falls man es sich kurzfristig anders überlegt und das Model wieder haben möchte (Undo-Funktion), kann man das Model wieder anlegen (Deswegen wird das gelöschte Model returnt).
+     * @param model Das zu löschende Model
+     * @return Das gelöschte Model
+     */
     T delete(T model);
 
     /**
      * @param id id des Models
-     * @return Genau 10 Models
+     * @return 1 Model
      */
     T findById(long id);
 
