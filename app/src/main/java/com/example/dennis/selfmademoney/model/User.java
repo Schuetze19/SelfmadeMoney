@@ -7,15 +7,6 @@ public class User {
     private String password;
     private final String email;
 
-    public User(final String username, final String email, String password){
-        // Id wird durch die Datenbank selbst erstellt und fortgezählt, weshalb man es nicht setzen sollte.
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.id = 0L;
-    }
-
-    // Wird nur für das generieren von Testdaten benötigt. Wenn eine richtige Datenbank dahinter ist, wird dieser Konstruktor entfernt.
     public User(final long id, final String username, final String email, String password){
         this.id = id;
         this.username = username;
@@ -24,8 +15,7 @@ public class User {
     }
 
     public long getId() {
-        // Solange keine Datenbank dahinter ist, wird eine Random id vergeben, die mindestens 11 betagen muss (Siehe createUser von UserDao)
-        return id == 0L ? (long)(Math.random()*11) : id;
+        return id;
     }
 
     public String getUsername() {

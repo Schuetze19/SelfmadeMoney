@@ -1,12 +1,23 @@
 package com.example.dennis.selfmademoney.dao;
 
 import com.example.dennis.selfmademoney.model.User;
-import com.example.dennis.selfmademoney.util.Shuffle;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDao implements IRepository<User> {
+
+    private final List<User> userList = Arrays.asList(
+            new User(1,"Schuetze19","Schuetze19@yahoo.de","PasswordSchuetze"),
+            new User(2,"Bonziller","Bonziller@yahoo.de","PasswordBonziller"),
+            new User(3,"MoneyMüller","MoneyMüller@yahoo.de","PasswordMoneyMüller"),
+            new User(4,"SiegerTyp","SiegerTyp@yahoo.de","PasswordSiegerTyp"),
+            new User(5,"StahlTräger18","StahlTräger18@yahoo.de","PasswordStahlTräger18"),
+            new User(6,"Gnome8532","Gnome8532@yahoo.de","PasswordGnome8532"),
+            new User(7,"TopfGold","TopfGold@yahoo.de","PasswordTopfGold"),
+            new User(8,"DonaldTrump","DonaldTrump@yahoo.de","PasswordDonaldTrump"),
+            new User(9,"GeldMaschine","GeldMaschine@yahoo.de","PasswordGeldMaschine"),
+            new User(10,"AliBaba","AliBaba@yahoo.de","PasswordAliBaba"));
 
     @Override
     public User save(User model) {
@@ -30,25 +41,12 @@ public class UserDao implements IRepository<User> {
     public User findById(long id) {
         // User mit id X soll zurückgegeben werden.
         // Falls die Id > 10 ist, dann wird der User "nicht gefunden" und dementsprechen Null zurückgegeben.
-        return id <= 10 ? createUser(id) : null;
+        return id <= userList.size() && id > 0 ? userList.get((int)id - 1) : null;
     }
 
     @Override
     public List<User> findAll() {
         // Alle User sollen zurückgegeben werden. (Aus test zwecken immer 10)
-        List<User> userList = new ArrayList<>();
-        for (int i = 1; i <= 10; i++){
-            userList.add(createUser(i));
-        }
         return userList;
-    }
-
-    /**
-     * Erzeugt einen User mit fiktiven Daten.
-     * @param id Der erzeugte User wird die id erhalten
-     * @return User
-     */
-    private User createUser(long id){
-        return new User(id, Shuffle.shuffle("John_Test"),Shuffle.shuffle("John_Test@Test.de"),Shuffle.shuffle("password"));
     }
 }
