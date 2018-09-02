@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SelfmadeMoney</string>
+    <string name="male_gender">Männlich</string>
+    <string name="female_gender">Weiblich</string>
 </resources>

@@ -2,22 +2,33 @@ package com.example.dennis.selfmademoney.dao;
 
 import com.example.dennis.selfmademoney.model.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class UserDao implements IRepository<User> {
 
-    private final ArrayList<User> userList = new ArrayList(Arrays.asList(
-            new User(1,"Schuetze19","Schuetze19@yahoo.de","PasswordSchuetze"),
-            new User(2,"Bonziller","Bonziller@yahoo.de","PasswordBonziller"),
-            new User(3,"MoneyMüller","MoneyMüller@yahoo.de","PasswordMoneyMüller"),
-            new User(4,"SiegerTyp","SiegerTyp@yahoo.de","PasswordSiegerTyp"),
-            new User(5,"StahlTräger18","StahlTräger18@yahoo.de","PasswordStahlTräger18"),
-            new User(6,"Gnome8532","Gnome8532@yahoo.de","PasswordGnome8532"),
-            new User(7,"TopfGold","TopfGold@yahoo.de","PasswordTopfGold"),
-            new User(8,"DonaldTrump","DonaldTrump@yahoo.de","PasswordDonaldTrump"),
-            new User(9,"GeldMaschine","GeldMaschine@yahoo.de","PasswordGeldMaschine"),
-            new User(10,"AliBaba","AliBaba@yahoo.de","PasswordAliBaba")));
+    private ArrayList<User> userList;
+
+    {
+        try {
+            userList = new ArrayList(Arrays.asList(
+                        new User(1,"Dennis","A","Schuetze19","Schuetze19@yahoo.de","PasswordSchuetze", new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1980"),"Berlin",true),
+                        new User(2,"Michael","K","Bonziller","Bonziller@yahoo.de","PasswordBonziller", new SimpleDateFormat("dd.MM.yyyy").parse("06.08.1995"),"Berlin", true),
+                        new User(3,"Meier","Müller","MoneyMüller","MoneyMüller@yahoo.de","PasswordMoneyMüller", new SimpleDateFormat("dd.MM.yyyy").parse("11.11.1958"),"Brandenburg", true),
+                        new User(4,"Henry","Sieg","SiegerTyp","SiegerTyp@yahoo.de","PasswordSiegerTyp", new SimpleDateFormat("dd.MM.yyyy").parse("21.07.1988"),"Köln", true),
+                        new User(5,"Carsten","Stahl","StahlTräger18","StahlTräger18@yahoo.de","PasswordStahlTräger18", new SimpleDateFormat("dd.MM.yyyy").parse("15.02.1991"),"München",true),
+                        new User(6,"Gisela","Norment","Gnome8532","Gnome8532@yahoo.de","PasswordGnome8532", new SimpleDateFormat("dd.MM.yyyy").parse("09.06.1978"),"Stuttgart", false),
+                        new User(7,"Tina","Gold","TopfGold","TopfGold@yahoo.de","PasswordTopfGold", new SimpleDateFormat("dd.MM.yyyy").parse("03.04.1986"),"Hamburg", false),
+                        new User(8,"Donald","Trump","DonaldTrump","DonaldTrump@yahoo.de","PasswordDonaldTrump", new SimpleDateFormat("dd.MM.yyyy").parse("13.01.1990"),"Frankfurt", true),
+                        new User(9,"Robert","Reuther","GeldMaschine","GeldMaschine@yahoo.de","PasswordGeldMaschine", new SimpleDateFormat("dd.MM.yyyy").parse("07.07.1977"),"Berlin", true),
+                        new User(10,"Ali","Baba","AliBaba","AliBaba@yahoo.de","PasswordAliBaba", new SimpleDateFormat("dd.MM.yyyy").parse("22.12.1978"),"Köln", true)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public User save(User model) {
