@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Profil theme -->
+    <style name="ProfilTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/profilPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/profilPrimaryDarkColor</item>
+        <item name="colorAccent">@color/profilAccentColor</item>
+    </style>
+
 </resources>

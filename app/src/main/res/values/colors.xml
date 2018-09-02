@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Profil Farben -->
+    <color name="profilPrimaryColor">#3F51B5</color>
+    <color name="profilPrimaryDarkColor">#292b3d</color>
+    <color name="profilGrayLight">#fafafa</color>
+    <color name="profilStartBlue">#09c6df</color>
+    <color name="profilEndBlue">#0bcce6</color>
+    <color name="profilAccentColor">#FF4081</color>
+
 </resources>
