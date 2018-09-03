@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_startseite"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_startseite" />
+
+    <item
+        android:id="@+id/navigation_auftrag"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        android:title="@string/title_auftrag" />
+
+    <item
+        android:id="@+id/navigation_meineAuftraege"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_meineAuftraege" />
+
+    <item
+        android:id="@+id/navigation_profil"
+        android:icon="@drawable/ic_person_black_36dp"
+        android:title="@string/title_profil" />
+
+</menu>

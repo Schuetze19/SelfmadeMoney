@@ -2,4 +2,12 @@
     <string name="app_name">SelfmadeMoney</string>
     <string name="male_gender">Männlich</string>
     <string name="female_gender">Weiblich</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_bottum">BottumActivity</string>
+    <string name="title_startseite">Startseite</string>
+    <string name="title_auftrag">Auftrag</string>
+    <string name="title_meineAuftraege">Meine Aufträge</string>
+    <string name="title_profil">Profil</string>
 </resources>

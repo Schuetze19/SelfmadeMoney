@@ -1,4 +1,4 @@
-package com.example.dennis.selfmademoney;
+package com.example.dennis.selfmademoney.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.dao.UserDao;
 import com.example.dennis.selfmademoney.model.User;
 import com.example.dennis.selfmademoney.util.ClipboardUtil;
