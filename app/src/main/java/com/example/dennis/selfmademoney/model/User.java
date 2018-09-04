@@ -1,10 +1,10 @@
 package com.example.dennis.selfmademoney.model;
 
-import com.example.dennis.selfmademoney.R;
-
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
@@ -14,6 +14,7 @@ public class User {
     private String password, beschreibung;
     private final Calendar mitgliedSeit = Calendar.getInstance();
     private final Calendar geborenAm = Calendar.getInstance();
+    private List<Auftrag> auftragsliste = new ArrayList<>();
 
     public User(final long id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male){
         this.id = id;
@@ -26,6 +27,20 @@ public class User {
         this.mitgliedSeit.setTime(new Date());
         this.wohnort = wohnort;
         this.male = male;
+    }
+
+    public User(final long id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male, List<Auftrag> auftragsliste){
+        this.id = id;
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.geborenAm.setTime(geborenAm);
+        this.mitgliedSeit.setTime(new Date());
+        this.wohnort = wohnort;
+        this.male = male;
+        this.auftragsliste = auftragsliste;
     }
 
     public long getId() {
@@ -82,5 +97,9 @@ public class User {
 
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
+    }
+
+    public List<Auftrag> getAuftragsliste() {
+        return auftragsliste;
     }
 }
