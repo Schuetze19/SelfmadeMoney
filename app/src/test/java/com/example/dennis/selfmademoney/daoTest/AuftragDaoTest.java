@@ -1,4 +1,4 @@
-package com.example.dennis.selfmademoney;
+package com.example.dennis.selfmademoney.daoTest;
 
 import com.example.dennis.selfmademoney.dao.AuftragDao;
 
