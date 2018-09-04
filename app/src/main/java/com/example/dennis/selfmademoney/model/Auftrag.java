@@ -7,7 +7,8 @@ public class Auftrag {
 
     private final long id;
     private String titel, beschreibung;
-    private Calendar erstellungsdatum, auftragsstart = Calendar.getInstance();
+    private Calendar erstellungsdatum = Calendar.getInstance();
+    private Calendar auftragsstart = Calendar.getInstance();
     private double verguetung;
     private Status status;
 
