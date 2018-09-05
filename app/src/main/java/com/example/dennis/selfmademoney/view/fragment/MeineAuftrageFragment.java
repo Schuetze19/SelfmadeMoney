@@ -32,11 +32,11 @@ public class MeineAuftrageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meine_auftrage, container, false);
         laufende_auftraege_recyclerview = view.findViewById(R.id.laufende_auftraege_recyclerview);
-        laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), auftragDao.findAllLaufende()));
+        laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), auftragDao.findAllLaufende(), null));
         laufende_auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         abgeschlossene_auftraege_recyclerview = view.findViewById(R.id.abgeschlossene_auftraege_recyclerview);
-        abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), auftragDao.findAllAbgeschlossene()));
+        abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), auftragDao.findAllAbgeschlossene(), Auftrag.Status.ABGESCHLOSSEN));
         abgeschlossene_auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;

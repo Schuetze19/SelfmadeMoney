@@ -1,6 +1,8 @@
 package com.example.dennis.selfmademoney.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +20,12 @@ public class MeineAuftraegeViewAdapter extends RecyclerView.Adapter<MeineAuftrae
 
     private Context context;
     private ArrayList<Auftrag> auftragList = new ArrayList<Auftrag>();
+    private Auftrag.Status status;
 
-    public MeineAuftraegeViewAdapter(Context context, ArrayList<Auftrag> auftragList) {
+    public MeineAuftraegeViewAdapter(@NonNull Context context, @NonNull ArrayList<Auftrag> auftragList, @Nullable Auftrag.Status status) {
         this.context = context;
         this.auftragList = auftragList;
+        this.status = status;
     }
 
     @Override
@@ -70,6 +74,9 @@ public class MeineAuftraegeViewAdapter extends RecyclerView.Adapter<MeineAuftrae
             txtVerguetung = itemView.findViewById(R.id.txtVerguetung);
             imageViewInfo = itemView.findViewById(R.id.imageViewInfo);
             imageViewDelete = itemView.findViewById(R.id.imageViewDelete);
+            if(status != null && !status.equals(Auftrag.Status.LAUFEND)){
+                imageViewDelete.setVisibility(View.GONE);
+            }
         }
     }
 

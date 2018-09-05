@@ -12,7 +12,7 @@ public class Auftrag {
     private double verguetung;
     private Status status;
 
-    private enum Status{
+    public enum Status{
         LAUFEND,
         GELOESCHT,
         ABGESCHLOSSEN;
