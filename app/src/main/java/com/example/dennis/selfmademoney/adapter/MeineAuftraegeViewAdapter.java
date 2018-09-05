@@ -35,7 +35,7 @@ public class MeineAuftraegeViewAdapter extends RecyclerView.Adapter<MeineAuftrae
     public void onBindViewHolder(MeineAuftraegeViewHolder holder, int position) {
         final Auftrag auftrag = auftragList.get(position);
         holder.txtTitel.setText(auftrag.getTitel());
-        holder.txtVerguetung.setText(""+auftrag.getVerguetung());
+        holder.txtVerguetung.setText(String.format("%.2f €", auftrag.getVerguetung()));
 
         holder.imageViewInfo.setOnClickListener(new View.OnClickListener() {
             @Override
