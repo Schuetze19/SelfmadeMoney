@@ -28,8 +28,6 @@ public class Auftrag {
         this.status = Status.OFFEN;
     }
 
-
-
     public long getId() {
         return id;
     }

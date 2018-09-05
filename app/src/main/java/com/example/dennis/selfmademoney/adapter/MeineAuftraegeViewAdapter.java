@@ -32,7 +32,7 @@ public class MeineAuftraegeViewAdapter extends RecyclerView.Adapter<MeineAuftrae
     }
 
     @Override
-    public void onBindViewHolder(MeineAuftraegeViewHolder holder, int position) {
+    public void onBindViewHolder(MeineAuftraegeViewHolder holder, final int position) {
         final Auftrag auftrag = auftragList.get(position);
         holder.txtTitel.setText(auftrag.getTitel());
         holder.txtVerguetung.setText(String.format("%.2f €", auftrag.getVerguetung()));
@@ -47,6 +47,8 @@ public class MeineAuftraegeViewAdapter extends RecyclerView.Adapter<MeineAuftrae
         holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                auftragList.remove(position);
+                notifyItemRemoved(position);
                 Toast.makeText(context, "Delete => "+auftrag.getId(), Toast.LENGTH_SHORT).show();
             }
         });
