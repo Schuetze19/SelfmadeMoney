@@ -13,7 +13,7 @@ public class Auftrag {
     private Status status;
 
     private enum Status{
-        OFFEN,
+        LAUFEND,
         GELOESCHT,
         ABGESCHLOSSEN;
     }
@@ -25,7 +25,10 @@ public class Auftrag {
         this.auftragsstart.setTime(auftragsstart);
         this.verguetung = verguetung;
         this.erstellungsdatum.setTime(new Date());
-        this.status = Status.OFFEN;
+        if(id < 3)
+            this.status = Status.LAUFEND;
+        else
+            this.status = Status.ABGESCHLOSSEN;
     }
 
     public long getId() {
@@ -64,8 +67,8 @@ public class Auftrag {
         this.verguetung = verguetung;
     }
 
-    public boolean isOffen(){
-        return Status.OFFEN.equals(status);
+    public boolean isLaufend(){
+        return Status.LAUFEND.equals(status);
     }
 
     public boolean isGeloescht(){

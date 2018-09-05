@@ -8,15 +8,53 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <TextView
+        android:id="@+id/txtLaufendeAuftraege"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Laufende Aufträge"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/auftraege_recyclerview"
+        android:id="@+id/laufende_auftraege_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLaufendeAuftraege">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/txtAbgeschlosseneAuftraege"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Abgeschlossene Aufträge"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/laufende_auftraege_recyclerview" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/abgeschlossene_auftraege_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scrollbars="vertical"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAbgeschlosseneAuftraege" />
 
 </android.support.constraint.ConstraintLayout>

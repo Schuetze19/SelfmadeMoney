@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class AuftragDao implements IRepository<Auftrag> {
 
@@ -44,7 +43,26 @@ public class AuftragDao implements IRepository<Auftrag> {
     }
 
     @Override
-    public List<Auftrag> findAll() {
+    public ArrayList<Auftrag> findAll() {
         return auftragsliste;
     }
+
+    public ArrayList<Auftrag> findAllLaufende(){
+        ArrayList laufendeAuftraege = new ArrayList();
+        for (Auftrag auftrag: auftragsliste) {
+            if(auftrag.isLaufend())
+                laufendeAuftraege.add(auftrag);
+        }
+        return laufendeAuftraege;
+    }
+
+    public ArrayList<Auftrag> findAllAbgeschlossene(){
+        ArrayList abgeschlosseneAuftraege = new ArrayList();
+        for (Auftrag auftrag: auftragsliste) {
+            if(auftrag.isAbgeschlossen())
+                abgeschlosseneAuftraege.add(auftrag);
+        }
+        return abgeschlosseneAuftraege;
+    }
+
 }

@@ -11,12 +11,13 @@ import android.view.ViewGroup;
 import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.adapter.MeineAuftraegeViewAdapter;
 import com.example.dennis.selfmademoney.dao.AuftragDao;
+import com.example.dennis.selfmademoney.model.Auftrag;
 
 import java.util.ArrayList;
 
 public class MeineAuftrageFragment extends Fragment {
 
-    private RecyclerView auftraege_recyclerview;
+    private RecyclerView laufende_auftraege_recyclerview, abgeschlossene_auftraege_recyclerview;
     private AuftragDao auftragDao = new AuftragDao();
 
     public MeineAuftrageFragment() {}
@@ -30,9 +31,14 @@ public class MeineAuftrageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meine_auftrage, container, false);
-        auftraege_recyclerview = view.findViewById(R.id.auftraege_recyclerview);
-        auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), new ArrayList(auftragDao.findAll())));
-        auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        laufende_auftraege_recyclerview = view.findViewById(R.id.laufende_auftraege_recyclerview);
+        laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), auftragDao.findAllLaufende()));
+        laufende_auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        abgeschlossene_auftraege_recyclerview = view.findViewById(R.id.abgeschlossene_auftraege_recyclerview);
+        abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), auftragDao.findAllAbgeschlossene()));
+        abgeschlossene_auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         return view;
     }
 
