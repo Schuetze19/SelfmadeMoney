@@ -12,6 +12,11 @@ public class StartseiteFragment extends Fragment {
 
     public StartseiteFragment() {}
 
+    public static StartseiteFragment newInstance() {
+        StartseiteFragment fragment = new StartseiteFragment();
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

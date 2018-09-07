@@ -22,6 +22,11 @@ public class MeineAuftrageFragment extends Fragment {
 
     public MeineAuftrageFragment() {}
 
+    public static MeineAuftrageFragment newInstance() {
+        MeineAuftrageFragment fragment = new MeineAuftrageFragment();
+        return fragment;
+    }
+
     public static MeineAuftrageFragment newInstance(String param1, String param2) {
         MeineAuftrageFragment fragment = new MeineAuftrageFragment();
         return fragment;

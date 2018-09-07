@@ -16,7 +16,6 @@ import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.dao.UserDao;
 import com.example.dennis.selfmademoney.model.User;
 import com.example.dennis.selfmademoney.util.ClipboardUtil;
-import com.example.dennis.selfmademoney.view.activity.ProfilActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -30,6 +29,11 @@ public class ProfilFragment extends Fragment {
     private ImageView emailToClip, usernameToClip;
 
     public ProfilFragment() {}
+
+    public static ProfilFragment newInstance() {
+        ProfilFragment fragment = new ProfilFragment();
+        return fragment;
+    }
 
     public static ProfilFragment newInstance(String param1, String param2) {
         ProfilFragment fragment = new ProfilFragment();

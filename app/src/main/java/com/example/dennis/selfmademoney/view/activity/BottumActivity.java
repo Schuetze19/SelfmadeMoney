@@ -1,22 +1,19 @@
 package com.example.dennis.selfmademoney.view.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.dennis.selfmademoney.R;
-import com.example.dennis.selfmademoney.view.fragment.AuftragFragment;
-import com.example.dennis.selfmademoney.view.fragment.MeineAuftrageFragment;
-import com.example.dennis.selfmademoney.view.fragment.ProfilFragment;
-import com.example.dennis.selfmademoney.view.fragment.StartseiteFragment;
+import com.example.dennis.selfmademoney.adapter.CollectionPagerAdapter;
 
 public class BottumActivity extends AppCompatActivity {
+
+    private CollectionPagerAdapter collectionPagerAdapter;
+    private ViewPager viewPager;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -25,16 +22,16 @@ public class BottumActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_startseite:
-                    switchToFragment(R.id.container, new StartseiteFragment());
+                    viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_auftrag:
-                    switchToFragment(R.id.container, new AuftragFragment());
+                    viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_meineAuftraege:
-                    switchToFragment(R.id.container, new MeineAuftrageFragment());
+                    viewPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_profil:
-                    switchToFragment(R.id.container, new ProfilFragment());
+                    viewPager.setCurrentItem(3);
                     return true;
             }
             return false;
@@ -48,15 +45,21 @@ public class BottumActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
 
-    private void switchToActivity(Activity startActivity, Class finishActivity){
-        Intent intent = new Intent(startActivity, finishActivity);
-        startActivity(intent);
-    }
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        collectionPagerAdapter = new CollectionPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(collectionPagerAdapter);
 
-    private void switchToFragment(int container, Fragment targetFragment) {
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(container, targetFragment).commit();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public void onPageScrollStateChanged(int state) {
+            }
+
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            public void onPageSelected(int position) {
+                navigation.getMenu().getItem(position).setChecked(true);
+            }
+        });
     }
 }

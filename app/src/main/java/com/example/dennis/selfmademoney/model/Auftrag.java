@@ -5,10 +5,11 @@ import java.util.Date;
 
 public class Auftrag {
 
-    private final long id;
+    private long id;
     private String titel, beschreibung;
     private Calendar erstellungsdatum = Calendar.getInstance();
     private Calendar auftragsstart = Calendar.getInstance();
+    private String location;
     private double verguetung;
     private Status status;
 
@@ -16,6 +17,17 @@ public class Auftrag {
         LAUFEND,
         GELOESCHT,
         ABGESCHLOSSEN;
+    }
+
+    public Auftrag(){}
+
+    public Auftrag(String titel, String beschreibung, Date auftragsstart, double verguetung, String location) {
+        this.titel = titel;
+        this.beschreibung = beschreibung;
+        this.auftragsstart.setTime(auftragsstart);
+        this.verguetung = verguetung;
+        this.location = location;
+        this.erstellungsdatum.setTime(new Date());
     }
 
     public Auftrag(final long id, String titel, String beschreibung, Date auftragsstart, double verguetung) {
