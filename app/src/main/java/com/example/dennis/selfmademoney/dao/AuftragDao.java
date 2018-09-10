@@ -24,6 +24,8 @@ public class AuftragDao implements IRepository<Auftrag> {
 
     @Override
     public Auftrag save(Auftrag model) {
+        if(model != null)
+            auftragsliste.add(model);
         return model;
     }
 
@@ -34,6 +36,18 @@ public class AuftragDao implements IRepository<Auftrag> {
 
     @Override
     public Auftrag delete(Auftrag model) {
+        if(model != null && auftragsliste.contains(model)) {
+            auftragsliste.remove(model);
+        }else if(model != null) {
+            int delAuftragPosi = -1;
+            for (int i = 0; i < auftragsliste.size(); i++) {
+                if (auftragsliste.get(i).getId() == model.getId())
+                    delAuftragPosi = i;
+                    break;
+            }
+            if(delAuftragPosi != -1)
+                auftragsliste.remove(delAuftragPosi);
+        }
         return model;
     }
 
