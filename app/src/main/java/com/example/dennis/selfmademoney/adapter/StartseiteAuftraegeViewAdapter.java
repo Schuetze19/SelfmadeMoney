@@ -36,7 +36,7 @@ public class StartseiteAuftraegeViewAdapter extends RecyclerView.Adapter<Startse
     public void onBindViewHolder(StartseiteAuftraegeViewAdapter.StartseiteAuftraegeViewHolder holder, int position) {
         final Auftrag auftrag = auftragList.get(position);
         holder.txtUsername.setText("Username");
-        holder.txtErstellungsdatum.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getErstellungsdatum()));
+        holder.txtErstellungsdatum.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getAuftragsstart()));
         holder.txtBeschreibung.setText(auftrag.getBeschreibung());
         holder.txtVerguetung.setText(String.format("%.2f €", auftrag.getVerguetung()));
         holder.txtWohnort.setText("Wohnort");
