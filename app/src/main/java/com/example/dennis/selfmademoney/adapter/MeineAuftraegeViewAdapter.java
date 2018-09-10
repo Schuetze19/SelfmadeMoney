@@ -51,7 +51,10 @@ public class MeineAuftraegeViewAdapter extends RecyclerView.Adapter<MeineAuftrae
         holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auftragList.remove(position);
+                if(auftragList.size() > 0 && position < auftragList.size())
+                    auftragList.remove(position);
+                else if(auftragList.size() > 0)
+                    auftragList.remove(auftragList.size()-1);
                 notifyItemRemoved(position);
                 Toast.makeText(context, "Delete => "+auftrag.getId(), Toast.LENGTH_SHORT).show();
             }
