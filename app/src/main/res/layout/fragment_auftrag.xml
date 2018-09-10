@@ -96,19 +96,6 @@
             app:layout_constraintStart_toEndOf="@+id/lblVerguetung"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
-        <EditText
-            android:id="@+id/txtStarttime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:inputType="date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lblStarttime"
-            app:layout_constraintTop_toBottomOf="@+id/txtPayment" />
-
         <TextView
             android:id="@+id/lblStarttime"
             android:layout_width="wrap_content"
@@ -119,15 +106,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblVerguetung" />
 
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:spinnersShown="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lblStarttime"
+            app:layout_constraintTop_toBottomOf="@+id/txtPayment" />
+
         <TextView
             android:id="@+id/lblLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="24dp"
             android:text="Standort:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblStarttime" />
+            app:layout_constraintTop_toBottomOf="@+id/datePicker" />
 
         <EditText
             android:id="@+id/txtLocation"
@@ -135,12 +135,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/lblLocation"
-            app:layout_constraintTop_toBottomOf="@+id/txtStarttime" />
+            app:layout_constraintTop_toBottomOf="@+id/datePicker" />
 
         <TextView
             android:id="@+id/lblDescription"

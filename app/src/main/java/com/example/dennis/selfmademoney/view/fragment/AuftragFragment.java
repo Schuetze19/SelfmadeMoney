@@ -2,14 +2,18 @@ package com.example.dennis.selfmademoney.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.controller.AuftragController;
+
+import java.util.Calendar;
 
 public class AuftragFragment extends Fragment {
 
@@ -18,10 +22,11 @@ public class AuftragFragment extends Fragment {
     private Button btnCancel;
     private EditText txtTitle;
     private EditText txtPayment;
-    private EditText txtStarttime;
+    private DatePicker datePicker;
     private EditText txtLocation;
     private EditText txtDescription;
     private AuftragController auftragController = new AuftragController();
+    private final int TAGE = 31;
 
     public AuftragFragment () {}
 
@@ -44,7 +49,8 @@ public class AuftragFragment extends Fragment {
         this.btnCancel = (Button) view.findViewById(R.id.btnCancel);
         this.txtTitle = (EditText) view.findViewById(R.id.txtTitle);
         this.txtPayment = (EditText) view.findViewById(R.id.txtPayment);
-        this.txtStarttime = (EditText) view.findViewById(R.id.txtStarttime);
+        this.datePicker = (DatePicker) view.findViewById(R.id.datePicker);
+        this.datePicker.updateDate(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         this.txtLocation = (EditText) view.findViewById(R.id.txtLocation);
         this.txtDescription = (EditText) view.findViewById(R.id.txtDescription);
         addButtonListener();
@@ -52,13 +58,21 @@ public class AuftragFragment extends Fragment {
     }
 
     private void addButtonListener(){
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        datePicker.setMinDate(System.currentTimeMillis() - 100);
+        calendar.add(Calendar.DATE, TAGE);
+        datePicker.setMaxDate(calendar.getTimeInMillis());
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Benutereingabe von einem Datum nicht ohne weiteres möglich
-                //uftragController.createAuftrag(
-                //        txtTitle.getText().toString(), txtDescription.getText().toString(), Date.valueOf(txtStarttime.getText().toString()),
-                //        Double.parseDouble(txtPayment.getText().toString()), txtLocation.getText().toString());
+                final Calendar choosenAuftragsstart = Calendar.getInstance();
+                choosenAuftragsstart.setTimeInMillis(0);
+                choosenAuftragsstart.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+                auftragController.createAuftrag(
+                        txtTitle.getText().toString(), txtDescription.getText().toString(), choosenAuftragsstart.getTime(),
+                       Double.parseDouble(txtPayment.getText().toString()), txtLocation.getText().toString());
                 clearUIElements();
             }
         });
@@ -82,7 +96,7 @@ public class AuftragFragment extends Fragment {
     private void clearUIElements(){
         txtTitle.setText("");
         txtPayment.setText("");
-        txtStarttime.setText("");
+        datePicker.updateDate(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         txtLocation.setText("");
         txtDescription.setText("");
     }
