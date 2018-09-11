@@ -35,19 +35,14 @@ public class StartseiteAuftraegeViewAdapter extends RecyclerView.Adapter<Startse
     @Override
     public void onBindViewHolder(StartseiteAuftraegeViewAdapter.StartseiteAuftraegeViewHolder holder, int position) {
         final Auftrag auftrag = auftragList.get(position);
+        holder.txtStarttime.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getAuftragsstart()));
         holder.txtUsername.setText("Username");
-        holder.txtErstellungsdatum.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getAuftragsstart()));
+        holder.txtErstellungsdatum.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getErstellungsdatum()));
         holder.txtBeschreibung.setText(auftrag.getBeschreibung());
         holder.txtVerguetung.setText(String.format("%.2f €", auftrag.getVerguetung()));
         holder.txtWohnort.setText("Wohnort");
 
         holder.btnAnfrageStellen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        holder.btnIgnorieren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -62,18 +57,18 @@ public class StartseiteAuftraegeViewAdapter extends RecyclerView.Adapter<Startse
 
     public class StartseiteAuftraegeViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView txtUsername, txtErstellungsdatum, txtBeschreibung, txtVerguetung, txtWohnort;
-        public Button btnAnfrageStellen, btnIgnorieren;
+        public TextView txtUsername, txtErstellungsdatum, txtBeschreibung, txtVerguetung, txtWohnort, txtStarttime;
+        public Button btnAnfrageStellen;
 
         public StartseiteAuftraegeViewHolder(View itemView) {
             super(itemView);
+            txtStarttime = itemView.findViewById(R.id.txtStarttime);
             txtUsername = itemView.findViewById(R.id.txtUsername);
             txtErstellungsdatum = itemView.findViewById(R.id.txtErstellungsdatum);
             txtBeschreibung = itemView.findViewById(R.id.txtBeschreibung);
             txtVerguetung = itemView.findViewById(R.id.txtVerguetung);
             txtWohnort = itemView.findViewById(R.id.txtWohnort);
             btnAnfrageStellen = itemView.findViewById(R.id.btnAnfrageStellen);
-            btnIgnorieren = itemView.findViewById(R.id.btnIgnorieren);
         }
     }
 
