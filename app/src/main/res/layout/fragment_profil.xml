@@ -16,6 +16,59 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:background="@drawable/gradientbackround"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profilBild"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    app:civ_border_color="#FFFFFF"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="Username"
+                    android:textAppearance="@android:style/TextAppearance.Material.Headline"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profilBild" />
+
+                <ImageView
+                    android:id="@+id/usernameToClip"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="14dp"
+                    android:focusableInTouchMode="false"
+                    android:tint="@android:color/white"
+                    app:layout_constraintStart_toEndOf="@+id/txtUsername"
+                    app:layout_constraintTop_toBottomOf="@+id/profilBild"
+                    app:srcCompat="@drawable/ic_content_copy_black_36dp" />
+
+            </android.support.constraint.ConstraintLayout>
+
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
@@ -129,17 +182,16 @@
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                android:id="@+id/txtFullName"
+            <ImageView
+                android:id="@+id/emailImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="33dp"
-                android:text="Vorname Nachname"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/chatImage"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="Mail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:srcCompat="@drawable/ic_mail_white_36dp" />
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -163,21 +215,28 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
                 app:srcCompat="@drawable/ic_content_copy_black_36dp" />
 
-            <Button
-                android:id="@+id/button"
+            <ImageView
+                android:id="@+id/chatImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/profilbuttonstyle"
-                android:text="Klick"
-                android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:tint="@color/profilStartBlue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/emailImage"
+                app:srcCompat="@drawable/ic_person_black_36dp" />
+
+            <TextView
+                android:id="@+id/txtFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="33dp"
+                android:text="Vorname Nachname"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/chatImage"
+                app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
             <ImageView
                 android:id="@+id/placeImage"
@@ -190,59 +249,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/chatImage"
                 app:srcCompat="@drawable/ic_place_black_36dp" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:background="@drawable/gradientbackround"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profilBild"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    app:civ_border_color="#FFFFFF"
-                    app:civ_border_width="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txtUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:text="Username"
-                    android:textAppearance="@android:style/TextAppearance.Material.Headline"
-                    android:textColor="@color/cardview_light_background"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profilBild" />
-
-                <ImageView
-                    android:id="@+id/usernameToClip"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="14dp"
-                    android:focusableInTouchMode="false"
-                    android:tint="@android:color/white"
-                    app:layout_constraintStart_toEndOf="@+id/txtUsername"
-                    app:layout_constraintTop_toBottomOf="@+id/profilBild"
-                    app:srcCompat="@drawable/ic_content_copy_black_36dp" />
-
-            </android.support.constraint.ConstraintLayout>
-
             <TextView
                 android:id="@+id/txtPlace"
                 android:layout_width="wrap_content"
@@ -254,28 +260,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/placeImage"
                 app:layout_constraintTop_toBottomOf="@+id/txtFullName" />
-
-            <ImageView
-                android:id="@+id/emailImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
-                android:contentDescription="Mail"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:srcCompat="@drawable/ic_mail_white_36dp" />
-
-            <ImageView
-                android:id="@+id/chatImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:tint="@color/profilStartBlue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailImage"
-                app:srcCompat="@drawable/ic_person_black_36dp" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -303,6 +287,22 @@
                 app:layout_constraintHorizontal_bias="0.25"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/placeImage" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/profilbuttonstyle"
+                android:text="Klick"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editDescription" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
