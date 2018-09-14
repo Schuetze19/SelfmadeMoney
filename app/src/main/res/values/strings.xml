@@ -3,6 +3,48 @@
     <string name="male_gender">Männlich</string>
     <string name="female_gender">Weiblich</string>
 
+    <!-- StartseiteAuftraegeViewAdapter -->
+    <string name="lbl_username">Username</string>
+    <string name="lbl_place">Place</string>
+
+    <!-- activity_login -->
+    <string name="txtEmail">Email</string>
+    <string name="txtPassword">Password</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnRegister">Register</string>
+
+    <!-- fragment_auftrag -->
+    <string name="lblTitle">Title:</string>
+    <string name="lblSalary">Salary:</string>
+    <string name="lblOrderStart">Order Start:</string>
+    <string name="lblLocation">Location:</string>
+    <string name="lblDescription">Description:</string>
+    <string name="btnCreate">Create</string>
+    <string name="btnReset">Reset</string>
+    <string name="btnAbort">Abort</string>
+
+    <!-- fragment_profil -->
+    <string name="lblMemberSince">Member since</string>
+    <string name="lblOrders">Orders</string>
+    <string name="lblProfileEmailAdress">E-Mail Adress</string>
+    <string name="lblProfileFullName">Firstname Surname</string>
+    <string name="lblProfilePlace">Place</string>
+    <string name="lblProfileDescription">Description</string>
+
+    <!-- fragment_meine_auftraege -->
+    <string name="lblOngoingOrders">Ongoing orders</string>
+    <string name="lblCompletedOrders">Completed orders</string>
+
+    <!-- meine_auftrage_row_item -->
+    <string name="lblRowTitle">Title</string>
+    <string name="lblRowSalary">Salary in €</string>
+
+    <!-- startseite_auftraege_row_item -->
+    <string name="lblStartTime">Start time</string>
+    <string name="lblCreationDate">Creation Date</string>
+    <string name="lblStartRowSalary">Salary</string>
+    <string name="btnMakeAnInquiry">Make an inquiry</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_bottum">BottumActivity</string>

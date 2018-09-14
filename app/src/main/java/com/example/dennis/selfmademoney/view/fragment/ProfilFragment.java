@@ -1,7 +1,5 @@
 package com.example.dennis.selfmademoney.view.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,6 +25,8 @@ public class ProfilFragment extends Fragment {
     private TextView txtUsername, txtEmail, txtMitgliedSeit, txtFullName, txtPlace;
     private EditText editDescription;
     private ImageView emailToClip, usernameToClip;
+    private final String clipboardkey_email = "email";
+    private final String clipboardkey_username = "username";
 
     public ProfilFragment() {}
 
@@ -69,7 +69,7 @@ public class ProfilFragment extends Fragment {
         emailToClip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClipboardUtil.copyToClipboard(getActivity(),"email", user.getEmail());
+                ClipboardUtil.copyToClipboard(getActivity(),clipboardkey_email, user.getEmail());
                 Toast.makeText(getContext(),user.getEmail()+" kopiert", Toast.LENGTH_SHORT).show();
             }
         });
@@ -77,7 +77,7 @@ public class ProfilFragment extends Fragment {
         usernameToClip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClipboardUtil.copyToClipboard(getActivity(),"username", user.getUsername());
+                ClipboardUtil.copyToClipboard(getActivity(),clipboardkey_username, user.getUsername());
                 Toast.makeText(getContext(),user.getUsername()+" kopiert", Toast.LENGTH_SHORT).show();
             }
         });

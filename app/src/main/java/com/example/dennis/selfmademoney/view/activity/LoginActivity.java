@@ -2,7 +2,9 @@ package com.example.dennis.selfmademoney.view.activity;
 
 import com.example.dennis.selfmademoney.R;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText txtPassword, txtEmail;
     private Button btnRegister, btnLogin;
+    private SharedPreferences sharedPref;
+    private final String sharedpreferences_email = "email";
+    private final String sharedpreferences_password = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
-
         registerListener();
+        /*sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        if(sharedPref != null && sharedPref.getString(sharedpreferences_email,null) != null)
+            new Authentifizierungstask().execute(sharedPref.getString(sharedpreferences_email,null), sharedPref.getString(sharedpreferences_password,null));*/
     }
 
     private void registerListener(){
@@ -59,6 +66,15 @@ public class LoginActivity extends AppCompatActivity {
                 return Boolean.FALSE;
             final String email = strings[0];
             final String passwort = strings[1];
+
+            // Wenn email und passwort mit der Datenbank übereinstimmen, dann speichere die Daten Lokal auf dem Handy ab
+            /*if(sharedPref != null){
+                final SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(sharedpreferences_email, email);
+                editor.putString(sharedpreferences_password, passwort);
+                editor.commit();
+            }*/
+
             return Boolean.TRUE;
         }
 

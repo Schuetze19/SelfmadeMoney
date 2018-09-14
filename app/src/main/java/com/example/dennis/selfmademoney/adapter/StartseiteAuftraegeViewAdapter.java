@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class StartseiteAuftraegeViewAdapter extends RecyclerView.Adapter<StartseiteAuftraegeViewAdapter.StartseiteAuftraegeViewHolder> {
 
+    private final String datePattern = "dd.MM.yyyy";
     private Context context;
     private ArrayList<Auftrag> auftragList = new ArrayList<Auftrag>();
 
@@ -35,12 +36,12 @@ public class StartseiteAuftraegeViewAdapter extends RecyclerView.Adapter<Startse
     @Override
     public void onBindViewHolder(StartseiteAuftraegeViewAdapter.StartseiteAuftraegeViewHolder holder, int position) {
         final Auftrag auftrag = auftragList.get(position);
-        holder.txtStarttime.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getAuftragsstart()));
-        holder.txtUsername.setText("Username");
-        holder.txtErstellungsdatum.setText(new SimpleDateFormat("dd.MM.yyyy").format(auftrag.getErstellungsdatum()));
+        holder.txtStarttime.setText(new SimpleDateFormat(datePattern).format(auftrag.getAuftragsstart()));
+        holder.txtUsername.setText(context.getString(R.string.lbl_username));
+        holder.txtErstellungsdatum.setText(new SimpleDateFormat(datePattern).format(auftrag.getErstellungsdatum()));
         holder.txtBeschreibung.setText(auftrag.getBeschreibung());
         holder.txtVerguetung.setText(String.format("%.2f €", auftrag.getVerguetung()));
-        holder.txtWohnort.setText("Wohnort");
+        holder.txtWohnort.setText(context.getString(R.string.lbl_place));
 
         holder.btnAnfrageStellen.setOnClickListener(new View.OnClickListener() {
             @Override

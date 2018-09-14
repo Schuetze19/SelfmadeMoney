@@ -1,7 +1,5 @@
 package com.example.dennis.selfmademoney.controller;
 
-import android.util.Log;
-
 import com.example.dennis.selfmademoney.dao.AuftragDao;
 import com.example.dennis.selfmademoney.model.Auftrag;
 

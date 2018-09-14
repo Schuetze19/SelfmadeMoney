@@ -15,6 +15,7 @@ public class User {
     private final Calendar mitgliedSeit = Calendar.getInstance();
     private final Calendar geborenAm = Calendar.getInstance();
     private List<Auftrag> auftragsliste = new ArrayList<>();
+    private final String datePattern = "dd.MM.yyyy";
 
     public User(final long id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male){
         this.id = id;
@@ -64,7 +65,7 @@ public class User {
     }
 
     public String getMitgliedSeit(){
-        return new SimpleDateFormat("dd.MM.yyyy").format(mitgliedSeit.getTime());
+        return new SimpleDateFormat(datePattern).format(mitgliedSeit.getTime());
     }
 
     public String getVorname() {
@@ -80,7 +81,7 @@ public class User {
     }
 
     public String getGeborenAm() {
-        return new SimpleDateFormat("dd.MM.yyyy").format(geborenAm.getTime());
+        return new SimpleDateFormat(datePattern).format(geborenAm.getTime());
     }
 
     public String getWohnort() {

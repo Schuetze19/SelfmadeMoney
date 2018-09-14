@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:background="#FF6A6A"
                 android:gravity="center"
-                android:text="Startzeit"
+                android:text="@string/lblStartTime"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="28dp"
-                android:text="Username"
+                android:text="@string/lbl_username"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="28dp"
-                android:text="Erstellungsdatum"
+                android:text="@string/lblCreationDate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +56,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:text="Beschreibung"
+                android:text="@string/lblProfileDescription"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Vergütung"
+                android:text="@string/lblStartRowSalary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtBeschreibung" />
 
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Wohnort"
+                android:text="@string/lblProfilePlace"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.963"
                 app:layout_constraintStart_toEndOf="@+id/txtVerguetung"
@@ -91,7 +91,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="108dp"
                 android:layout_marginTop="8dp"
-                android:text="Anfrage stellen"
+                android:text="@string/btnMakeAnInquiry"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.019"
