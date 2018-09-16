@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1029649441293",
+    "firebase_url": "https://selfmademoney-81f06.firebaseio.com",
+    "project_id": "selfmademoney-81f06",
+    "storage_bucket": "selfmademoney-81f06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029649441293:android:f332e4a36ded84cb",
+        "android_client_info": {
+          "package_name": "com.example.dennis.selfmademoney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029649441293-9hkat0ckcnib55qbssj4e590dms83dv3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dennis.selfmademoney",
+            "certificate_hash": "c335b8afdc52f45d263b4f425f7a1b2a866ac7af"
+          }
+        },
+        {
+          "client_id": "1029649441293-bu1167cno0h569laaf00cdob3ioc6qai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDRqly0jzcCj1SmOI0Ap1qQ31iqk61zjQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029649441293-bu1167cno0h569laaf00cdob3ioc6qai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
