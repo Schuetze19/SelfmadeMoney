@@ -1,14 +1,13 @@
 package com.example.dennis.selfmademoney.model;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Auftrag {
 
-    private long id;
+    private String id;
     private String titel, beschreibung;
-    private Calendar erstellungsdatum = Calendar.getInstance();
-    private Calendar auftragsstart = Calendar.getInstance();
+    private Date erstellungsdatum = new Date();
+    private Date auftragsstart = new Date();
     private String location;
     private double verguetung;
     private Status status;
@@ -24,26 +23,27 @@ public class Auftrag {
     public Auftrag(String titel, String beschreibung, Date auftragsstart, double verguetung, String location) {
         this.titel = titel;
         this.beschreibung = beschreibung;
-        this.auftragsstart.setTime(auftragsstart);
+        this.auftragsstart.setTime(auftragsstart.getTime());
         this.verguetung = verguetung;
         this.location = location;
-        this.erstellungsdatum.setTime(new Date());
+        this.erstellungsdatum.setTime(new Date().getTime());
     }
 
-    public Auftrag(final long id, String titel, String beschreibung, Date auftragsstart, double verguetung) {
+    public Auftrag(final String id, String titel, String beschreibung, Date auftragsstart, double verguetung, String location) {
         this.id = id;
         this.titel = titel;
         this.beschreibung = beschreibung;
-        this.auftragsstart.setTime(auftragsstart);
+        this.auftragsstart.setTime(auftragsstart.getTime());
         this.verguetung = verguetung;
-        this.erstellungsdatum.setTime(new Date());
-        if(id < 3)
-            this.status = Status.LAUFEND;
-        else
-            this.status = Status.ABGESCHLOSSEN;
+        this.erstellungsdatum.setTime(new Date().getTime());
+        this.location = location;
     }
 
-    public long getId() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -64,11 +64,11 @@ public class Auftrag {
     }
 
     public Date getErstellungsdatum() {
-        return erstellungsdatum.getTime();
+        return erstellungsdatum;
     }
 
     public Date getAuftragsstart() {
-        return auftragsstart.getTime();
+        return auftragsstart;
     }
 
     public double getVerguetung() {
@@ -97,5 +97,13 @@ public class Auftrag {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

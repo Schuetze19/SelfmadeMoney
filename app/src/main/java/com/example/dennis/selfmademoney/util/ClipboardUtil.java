@@ -8,9 +8,11 @@ import android.content.Context;
 public class ClipboardUtil {
 
     public static void copyToClipboard(Activity activity, String key, String text){
-        ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText(key, text);
-        clipboard.setPrimaryClip(clip);
+        if(!key.trim().isEmpty() && !text.trim().isEmpty()) {
+            ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText(key, text);
+            clipboard.setPrimaryClip(clip);
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.dennis.selfmademoney.view.fragment;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +13,9 @@ import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.adapter.StartseiteAuftraegeViewAdapter;
 import com.example.dennis.selfmademoney.dao.AuftragDao;
 import com.example.dennis.selfmademoney.model.Auftrag;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -21,7 +23,8 @@ public class StartseiteFragment extends Fragment {
 
     private RecyclerView startseite_auftraege;
     private SearchView searchView;
-    private AuftragDao auftragDao = new AuftragDao();
+    private final ArrayList<Auftrag> auftragArrayList = new ArrayList<>();
+    private final AuftragDao auftragDao = new AuftragDao();
 
     public StartseiteFragment() {}
 
@@ -43,21 +46,28 @@ public class StartseiteFragment extends Fragment {
         startseite_auftraege.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         searchView = view.findViewById(R.id.searchView);
-        new AsynchAuftraegeLoader().execute();
         return view;
     }
 
-    private class AsynchAuftraegeLoader extends AsyncTask<Void,Void,ArrayList<Auftrag>>{
 
-        @Override
-        protected ArrayList<Auftrag> doInBackground(Void... voids) {
-            return auftragDao.findAllLaufende();
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        @Override
-        protected void onPostExecute(ArrayList<Auftrag> auftragArrayList) {
-            startseite_auftraege.setAdapter(new StartseiteAuftraegeViewAdapter(getActivity(), auftragArrayList));
-        }
+        auftragDao.getDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                auftragArrayList.clear();
+                for (DataSnapshot data: dataSnapshot.getChildren()) {
+                    auftragArrayList.add(data.getValue(Auftrag.class));
+                }
+                startseite_auftraege.setAdapter(new StartseiteAuftraegeViewAdapter(getActivity(), auftragArrayList));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
-
 }

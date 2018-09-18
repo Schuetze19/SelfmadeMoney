@@ -41,7 +41,7 @@ public class StartseiteAuftraegeViewAdapter extends RecyclerView.Adapter<Startse
         holder.txtErstellungsdatum.setText(new SimpleDateFormat(datePattern).format(auftrag.getErstellungsdatum()));
         holder.txtBeschreibung.setText(auftrag.getBeschreibung());
         holder.txtVerguetung.setText(String.format("%.2f €", auftrag.getVerguetung()));
-        holder.txtWohnort.setText(context.getString(R.string.lbl_place));
+        holder.txtWohnort.setText(auftrag.getLocation());
 
         holder.btnAnfrageStellen.setOnClickListener(new View.OnClickListener() {
             @Override

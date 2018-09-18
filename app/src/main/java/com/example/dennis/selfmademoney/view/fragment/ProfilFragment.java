@@ -14,7 +14,15 @@ import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.dao.UserDao;
 import com.example.dennis.selfmademoney.model.User;
 import com.example.dennis.selfmademoney.util.ClipboardUtil;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -27,6 +35,10 @@ public class ProfilFragment extends Fragment {
     private ImageView emailToClip, usernameToClip;
     private final String clipboardkey_email = "email";
     private final String clipboardkey_username = "username";
+    private final String datePattern = "dd.MM.yyyy";
+    private final UserDao userDao = new UserDao();
+    private FirebaseAuth mAuth;
+    private User user;
 
     public ProfilFragment() {}
 
@@ -43,6 +55,7 @@ public class ProfilFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -59,13 +72,29 @@ public class ProfilFragment extends Fragment {
         txtPlace = (TextView) view.findViewById(R.id.txtPlace);
         editDescription = (EditText) view.findViewById(R.id.editDescription);
 
-        final User user = new UserDao().findById(2);
-        txtUsername.setText(user.getUsername());
-        txtMitgliedSeit.setText(user.getMitgliedSeit());
-        txtEmail.setText(user.getEmail());
-        txtFullName.setText(user.getFullName() + " / " + user.getGeborenAm());
-        txtPlace.setText(user.getWohnort());
-        editDescription.setText(user.getBeschreibung());
+        final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        txtUsername.setText(firebaseUser.getDisplayName() == null ? firebaseUser.getEmail() : firebaseUser.getDisplayName());
+        txtEmail.setText(firebaseUser.getEmail());
+        // Metadaten sind irgendwie immer Null ...
+        txtMitgliedSeit.setText(new SimpleDateFormat(datePattern).format(new Date(firebaseUser.getMetadata() != null ? firebaseUser.getMetadata().getCreationTimestamp() : System.currentTimeMillis())));
+        /*userDao.getDatabaseReference().child("userIdVomIntent").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+                txtUsername.setText(user.getUsername());
+                txtMitgliedSeit.setText(user.getMitgliedSeit());
+                txtEmail.setText(user.getEmail());
+                txtFullName.setText(user.getFullName() + " / " + user.getGeborenAm());
+                txtPlace.setText(user.getWohnort());
+                editDescription.setText(user.getBeschreibung());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
         emailToClip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +112,7 @@ public class ProfilFragment extends Fragment {
         });
 
         Picasso.get()
-                .load(R.drawable.ic_portrait_white_48dp)
+                .load(firebaseUser.getPhotoUrl())
                 .placeholder(R.drawable.ic_portrait_white_48dp)
                 .error(R.drawable.ic_portrait_white_48dp)
                 .transform(new CropCircleTransformation())

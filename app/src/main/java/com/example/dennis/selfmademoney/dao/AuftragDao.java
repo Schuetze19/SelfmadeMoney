@@ -1,6 +1,8 @@
 package com.example.dennis.selfmademoney.dao;
 
 import com.example.dennis.selfmademoney.model.Auftrag;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,44 +12,33 @@ import java.util.Arrays;
 public class AuftragDao implements IRepository<Auftrag> {
 
     private final String datePattern = "dd.MM.yyyy";
-    private ArrayList<Auftrag> auftragsliste;
-
-    {
-        try {
-            auftragsliste = new ArrayList(Arrays.asList(new Auftrag(1,"Lebensmittel einkaufen","Wallah, ich brauche viel Mehl und Backpulver. Bier, Brot und vieles mehr", new SimpleDateFormat(datePattern).parse("15.09.2018"),6.50),
-                    new Auftrag(2,"Alkohol für ne Party","Ich und meine Freunde veranstalten eine voll krasse Party und brauchen noch Alkohol. 2x Sky Vodka, 3x 1l Cola (1.5l is auch okay) und 2x 1 Liter Feigling ", new SimpleDateFormat(datePattern).parse("13.09.2018"),19.99),
-                    new Auftrag(3,"Mit Hund Gassi gehen","Ist ein Schäferhund so 2m groß und 148kg schwer. Hört auf den Namen 'Killer' und beißt fremde gern ins Bein", new SimpleDateFormat(datePattern).parse("17.09.2018"),9.99),
-                    new Auftrag(4,"Silvester mit Feiern","Will jemannd mit mir Silvester feiern? Verpflegung besorg ich.", new SimpleDateFormat(datePattern).parse("31.12.2018"),49.99)));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
+    private ArrayList<Auftrag> auftragsliste = new ArrayList<>();
+    private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("auftraege");
 
     @Override
     public Auftrag save(Auftrag model) {
-        if(model != null)
+        if(model != null) {
+            String id = databaseReference.push().getKey();
+            databaseReference.child(id).setValue(model);
+            model.setId(id);
             auftragsliste.add(model);
+        }
         return model;
     }
 
     @Override
     public Auftrag update(Auftrag model) {
+        if(model != null){
+            databaseReference.child(model.getId()).setValue(model);
+        }
         return model;
     }
 
     @Override
     public Auftrag delete(Auftrag model) {
-        if(model != null && auftragsliste.contains(model)) {
-            auftragsliste.remove(model);
-        }else if(model != null) {
-            int delAuftragPosi = -1;
-            for (int i = 0; i < auftragsliste.size(); i++) {
-                if (auftragsliste.get(i).getId() == model.getId())
-                    delAuftragPosi = i;
-                    break;
-            }
-            if(delAuftragPosi != -1)
-                auftragsliste.remove(delAuftragPosi);
+
+        if(model != null){
+            databaseReference.child(model.getId()).removeValue();
         }
         return model;
     }
@@ -80,4 +71,8 @@ public class AuftragDao implements IRepository<Auftrag> {
         return abgeschlosseneAuftraege;
     }
 
+    @Override
+    public DatabaseReference getDatabaseReference() {
+        return databaseReference;
+    }
 }

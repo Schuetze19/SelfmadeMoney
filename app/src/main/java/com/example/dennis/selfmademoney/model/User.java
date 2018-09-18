@@ -8,43 +8,47 @@ import java.util.List;
 
 public class User {
 
-    private final long id;
+    private String id;
     private final boolean male;
     private final String username, vorname, nachname, wohnort, email;
     private String password, beschreibung;
-    private final Calendar mitgliedSeit = Calendar.getInstance();
-    private final Calendar geborenAm = Calendar.getInstance();
+    private final Date mitgliedSeit = new Date();
+    private final Date geborenAm = new Date();
     private List<Auftrag> auftragsliste = new ArrayList<>();
     private final String datePattern = "dd.MM.yyyy";
 
-    public User(final long id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male){
+    public User(final String id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male){
         this.id = id;
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.geborenAm.setTime(geborenAm);
-        this.mitgliedSeit.setTime(new Date());
+        this.geborenAm.setTime(geborenAm.getTime());
+        this.mitgliedSeit.setTime(new Date().getTime());
         this.wohnort = wohnort;
         this.male = male;
     }
 
-    public User(final long id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male, List<Auftrag> auftragsliste){
+    public User(final String id, final String vorname, final String nachname, final String username, final String email, String password, final Date geborenAm, final String wohnort, boolean male, List<Auftrag> auftragsliste){
         this.id = id;
         this.vorname = vorname;
         this.nachname = nachname;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.geborenAm.setTime(geborenAm);
-        this.mitgliedSeit.setTime(new Date());
+        this.geborenAm.setTime(geborenAm.getTime());
+        this.mitgliedSeit.setTime(new Date().getTime());
         this.wohnort = wohnort;
         this.male = male;
         this.auftragsliste = auftragsliste;
     }
 
-    public long getId() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
         return id;
     }
 

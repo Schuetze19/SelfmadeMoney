@@ -1,6 +1,5 @@
 package com.example.dennis.selfmademoney.view.fragment;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +12,11 @@ import com.example.dennis.selfmademoney.R;
 import com.example.dennis.selfmademoney.adapter.MeineAuftraegeViewAdapter;
 import com.example.dennis.selfmademoney.dao.AuftragDao;
 import com.example.dennis.selfmademoney.model.Auftrag;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MeineAuftrageFragment extends Fragment {
 
@@ -45,25 +46,35 @@ public class MeineAuftrageFragment extends Fragment {
 
         abgeschlossene_auftraege_recyclerview = view.findViewById(R.id.abgeschlossene_auftraege_recyclerview);
         abgeschlossene_auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        new AsyncAuftraegeLoader().execute();
+
         return view;
     }
 
-    private class AsyncAuftraegeLoader extends AsyncTask<Void,Void,Void> {
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            laufendeAuftraege = auftragDao.findAllLaufende();
-            abgeschlosseneAuftraege = auftragDao.findAllAbgeschlossene();
-            return null;
-        }
+        auftragDao.getDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                laufendeAuftraege.clear();
+                abgeschlosseneAuftraege.clear();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Auftrag auftrag = data.getValue(Auftrag.class);
+                    if(auftrag.isLaufend()){
+                        laufendeAuftraege.add(auftrag);
+                    }else if(auftrag.isAbgeschlossen()){
+                        abgeschlosseneAuftraege.add(auftrag);
+                    }
+                }
+                laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), laufendeAuftraege, Auftrag.Status.LAUFEND));
+                abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), abgeschlosseneAuftraege, Auftrag.Status.ABGESCHLOSSEN));
+            }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), laufendeAuftraege, null));
-            abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), abgeschlosseneAuftraege, Auftrag.Status.ABGESCHLOSSEN));
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
     }
-
 }

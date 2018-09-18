@@ -1,5 +1,7 @@
 package com.example.dennis.selfmademoney.dao;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.List;
 
 public interface IRepository<T> {
@@ -25,4 +27,6 @@ public interface IRepository<T> {
      * @return Genau 10 Models
      */
     List<T> findAll();
+
+    DatabaseReference getDatabaseReference();
 }
