@@ -5,16 +5,15 @@ import com.example.dennis.selfmademoney.model.Auftrag;
 
 import java.util.Date;
 
+// Ist diese Klasse wirklich nötig? Es ist nur eine "Weiterleitungsklasse"
 public class AuftragController {
 
     private AuftragDao auftragDao = new AuftragDao();
 
     public AuftragController(){}
 
-    public void createAuftrag(String titel, String beschreibung, Date auftragsstart, double verguetung, String location){
-        Auftrag auftrag = new Auftrag(titel, beschreibung, auftragsstart, verguetung, location);
-        //Objekt ist bereit um in die Datenbank geschrieben zu werden.
-        //Überlegung -> Datenbankoperationen in eine Manager bzw Service Klasse auslagern.
+    public void createAuftrag(String titel, String beschreibung, Date auftragsstart, double verguetung, String location, String userId){
+        Auftrag auftrag = new Auftrag(titel, beschreibung, auftragsstart, verguetung, location, userId);
         auftragDao.save(auftrag);
     }
 

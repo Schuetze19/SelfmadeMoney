@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.dennis.selfmademoney.R;
@@ -14,6 +15,7 @@ public class BottumActivity extends AppCompatActivity {
 
     private CollectionPagerAdapter collectionPagerAdapter;
     private ViewPager viewPager;
+    private String userId = "";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,6 +48,8 @@ public class BottumActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        userId = getIntent().getStringExtra(getString(R.string.intent_userId));
+        Log.v("VERBOSE",userId+"<<<");
         viewPager = (ViewPager) findViewById(R.id.pager);
         collectionPagerAdapter = new CollectionPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(collectionPagerAdapter);
@@ -61,6 +65,7 @@ public class BottumActivity extends AppCompatActivity {
                 navigation.getMenu().getItem(position).setChecked(true);
             }
         });
+
     }
 
     @Override

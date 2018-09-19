@@ -3,6 +3,9 @@
     <string name="male_gender">Männlich</string>
     <string name="female_gender">Weiblich</string>
 
+    <!-- Intent Keys (LoginActivity:signIn) -->
+    <string name="intent_userId">intentUserId</string>
+
     <!-- StartseiteAuftraegeViewAdapter -->
     <string name="lbl_username">Username</string>
     <string name="lbl_place">Place</string>

@@ -15,6 +15,10 @@ public class AuftragDao implements IRepository<Auftrag> {
     private ArrayList<Auftrag> auftragsliste = new ArrayList<>();
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("auftraege");
 
+    public AuftragDao(){
+
+    }
+
     @Override
     public Auftrag save(Auftrag model) {
         if(model != null) {
@@ -41,34 +45,6 @@ public class AuftragDao implements IRepository<Auftrag> {
             databaseReference.child(model.getId()).removeValue();
         }
         return model;
-    }
-
-    @Override
-    public Auftrag findById(long id) {
-        return id <= auftragsliste.size() && id > 0 ? auftragsliste.get((int) id - 1) : null;
-    }
-
-    @Override
-    public ArrayList<Auftrag> findAll() {
-        return auftragsliste;
-    }
-
-    public ArrayList<Auftrag> findAllLaufende(){
-        ArrayList laufendeAuftraege = new ArrayList();
-        for (Auftrag auftrag: auftragsliste) {
-            if(auftrag.isLaufend())
-                laufendeAuftraege.add(auftrag);
-        }
-        return laufendeAuftraege;
-    }
-
-    public ArrayList<Auftrag> findAllAbgeschlossene(){
-        ArrayList abgeschlosseneAuftraege = new ArrayList();
-        for (Auftrag auftrag: auftragsliste) {
-            if(auftrag.isAbgeschlossen())
-                abgeschlosseneAuftraege.add(auftrag);
-        }
-        return abgeschlosseneAuftraege;
     }
 
     @Override

@@ -12,11 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.dennis.selfmademoney.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.dennis.selfmademoney.dao.UserDao;
+import com.example.dennis.selfmademoney.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,24 +25,20 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private final String sharedpreferences_email = "email";
     private final String sharedpreferences_password = "password";
-    private FirebaseAuth mAuth;
+    private final String sharedpreferences_userId = "userId";
+    private final UserDao userDao = new UserDao();
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
-
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
         registerListener();
-        sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        if(sharedPref != null && sharedPref.getString(sharedpreferences_email,null) != null){
-            signIn(sharedPref.getString(sharedpreferences_email,null), sharedPref.getString(sharedpreferences_password,null));
-        }
     }
 
     private void registerListener(){
@@ -51,11 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String email = txtEmail.getText().toString().trim();
                 final String password = txtPassword.getText().toString().trim();
-                if(email.isEmpty() || email.length() <= 4 || !email.contains("@")){
-                    txtEmail.setError("Invalid E-Mail Adress");
-                }else if(password.isEmpty() || password.length() < 6) {
-                    txtPassword.setError("The Password need at least 6 characters");
-                }else{
+                if(validateInputWithErrors(email, password)){
                     signIn(email, password);
                 }
             }
@@ -74,33 +66,53 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn(@NonNull String email, @NonNull String password){
         if(!email.isEmpty() && email.length() >= 4 && email.contains("@")
                 && !password.isEmpty() && password.length() >= 6){
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+            userDao.getDatabaseReference().orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        if(sharedPref != null){
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String userStr = dataSnapshot.getValue().toString();
+                    String userPassword = userStr.substring(userStr.indexOf(", password=")+11);
+                    userPassword = userPassword.substring(0,userPassword.indexOf(","));
+                    if(password.trim().equalsIgnoreCase(userPassword.trim())) {
+                        String userId = userStr.substring(1,userStr.indexOf("="));
+                        if (sharedPref != null) {
                             final SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putString(sharedpreferences_email, email);
                             editor.putString(sharedpreferences_password, password);
+                            editor.putString(sharedpreferences_userId, userId);
                             editor.commit();
                         }
-                        startActivity(new Intent(LoginActivity.this, BottumActivity.class));
-                    }else{
-                        Log.v("VERBOSE",task.getException().getMessage());
-                        Log.v("VERBOSE",task.getResult().toString());
+                        Intent intent = new Intent(LoginActivity.this, BottumActivity.class);
+                        intent.putExtra(getString(R.string.intent_userId), userId);
+                        startActivity(intent);
                     }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // User nicht gefunden oder email und password falsch.
                 }
             });
         }
     }
 
+    private boolean validateInputWithErrors(String email, String password){
+        if(email.isEmpty() || email.length() <= 4 || !email.contains("@")){
+            txtEmail.setError("Invalid E-Mail Adress");
+            return false;
+        }else if(password.isEmpty() || password.length() < 6) {
+            txtPassword.setError("The Password need at least 6 characters");
+            return false;
+        }
+        return true;
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-
+        sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        if(sharedPref != null && sharedPref.getString(sharedpreferences_email,null) != null){
+            signIn(sharedPref.getString(sharedpreferences_email,null), sharedPref.getString(sharedpreferences_password,null));
         }
     }
 }

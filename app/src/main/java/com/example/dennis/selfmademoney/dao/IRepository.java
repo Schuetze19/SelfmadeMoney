@@ -17,16 +17,5 @@ public interface IRepository<T> {
      */
     T delete(T model);
 
-    /**
-     * @param id id des Models
-     * @return 1 Model
-     */
-    T findById(long id);
-
-    /**
-     * @return Genau 10 Models
-     */
-    List<T> findAll();
-
     DatabaseReference getDatabaseReference();
 }

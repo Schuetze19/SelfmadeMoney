@@ -24,6 +24,7 @@ public class MeineAuftrageFragment extends Fragment {
     private AuftragDao auftragDao = new AuftragDao();
     private ArrayList<Auftrag> laufendeAuftraege = new ArrayList<>();
     private ArrayList<Auftrag> abgeschlosseneAuftraege = new ArrayList<>();
+    private String userId = "";
 
     public MeineAuftrageFragment() {}
 
@@ -47,6 +48,7 @@ public class MeineAuftrageFragment extends Fragment {
         abgeschlossene_auftraege_recyclerview = view.findViewById(R.id.abgeschlossene_auftraege_recyclerview);
         abgeschlossene_auftraege_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        userId = getActivity().getIntent().getStringExtra(getString(R.string.intent_userId));
         return view;
     }
 
@@ -54,27 +56,29 @@ public class MeineAuftrageFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        auftragDao.getDatabaseReference().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                laufendeAuftraege.clear();
-                abgeschlosseneAuftraege.clear();
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Auftrag auftrag = data.getValue(Auftrag.class);
-                    if(auftrag.isLaufend()){
-                        laufendeAuftraege.add(auftrag);
-                    }else if(auftrag.isAbgeschlossen()){
-                        abgeschlosseneAuftraege.add(auftrag);
+        if(!userId.isEmpty()) {
+            auftragDao.getDatabaseReference().orderByChild("userId").equalTo(userId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    laufendeAuftraege.clear();
+                    abgeschlosseneAuftraege.clear();
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        Auftrag auftrag = data.getValue(Auftrag.class);
+                        if (auftrag.isLaufend()) {
+                            laufendeAuftraege.add(auftrag);
+                        } else if (auftrag.isAbgeschlossen()) {
+                            abgeschlosseneAuftraege.add(auftrag);
+                        }
                     }
+                    laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), laufendeAuftraege, Auftrag.Status.LAUFEND));
+                    abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), abgeschlosseneAuftraege, Auftrag.Status.ABGESCHLOSSEN));
                 }
-                laufende_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), laufendeAuftraege, Auftrag.Status.LAUFEND));
-                abgeschlossene_auftraege_recyclerview.setAdapter(new MeineAuftraegeViewAdapter(getActivity(), abgeschlosseneAuftraege, Auftrag.Status.ABGESCHLOSSEN));
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 }

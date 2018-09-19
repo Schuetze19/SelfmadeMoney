@@ -2,7 +2,6 @@ package com.example.dennis.selfmademoney.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ public class AuftragFragment extends Fragment {
     private EditText txtDescription;
     private AuftragController auftragController = new AuftragController();
     private final int TAGE = 31;
+    private String userId = "";
 
     public AuftragFragment () {}
 
@@ -53,6 +53,7 @@ public class AuftragFragment extends Fragment {
         this.datePicker.updateDate(Calendar.getInstance().get(Calendar.YEAR),Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         this.txtLocation = (EditText) view.findViewById(R.id.txtLocation);
         this.txtDescription = (EditText) view.findViewById(R.id.txtDescription);
+        userId = getActivity().getIntent().getStringExtra(getString(R.string.intent_userId));
         addButtonListener();
         return view;
     }
@@ -72,7 +73,7 @@ public class AuftragFragment extends Fragment {
                 choosenAuftragsstart.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
                 auftragController.createAuftrag(
                         txtTitle.getText().toString(), txtDescription.getText().toString(), choosenAuftragsstart.getTime(),
-                       Double.parseDouble(txtPayment.getText().toString()), txtLocation.getText().toString());
+                       Double.parseDouble(txtPayment.getText().toString()), txtLocation.getText().toString(),userId);
                 clearUIElements();
             }
         });

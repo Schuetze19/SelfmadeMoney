@@ -1,7 +1,10 @@
 package com.example.dennis.selfmademoney.model;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.Date;
 
+@IgnoreExtraProperties
 public class Auftrag {
 
     private String id;
@@ -11,6 +14,7 @@ public class Auftrag {
     private String location;
     private double verguetung;
     private Status status;
+    private String userId;
 
     public enum Status{
         LAUFEND,
@@ -20,16 +24,17 @@ public class Auftrag {
 
     public Auftrag(){}
 
-    public Auftrag(String titel, String beschreibung, Date auftragsstart, double verguetung, String location) {
+    public Auftrag(String titel, String beschreibung, Date auftragsstart, double verguetung, String location, String userId) {
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.auftragsstart.setTime(auftragsstart.getTime());
         this.verguetung = verguetung;
         this.location = location;
         this.erstellungsdatum.setTime(new Date().getTime());
+        this.userId = userId;
     }
 
-    public Auftrag(final String id, String titel, String beschreibung, Date auftragsstart, double verguetung, String location) {
+    public Auftrag(final String id, String titel, String beschreibung, Date auftragsstart, double verguetung, String location, String userId) {
         this.id = id;
         this.titel = titel;
         this.beschreibung = beschreibung;
@@ -37,6 +42,7 @@ public class Auftrag {
         this.verguetung = verguetung;
         this.erstellungsdatum.setTime(new Date().getTime());
         this.location = location;
+        this.userId = userId;
     }
 
     public void setId(String id) {
@@ -105,5 +111,13 @@ public class Auftrag {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
