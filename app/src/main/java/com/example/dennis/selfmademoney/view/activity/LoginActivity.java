@@ -1,6 +1,5 @@
 package com.example.dennis.selfmademoney.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -65,12 +64,11 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn(@NonNull String email, @NonNull String password){
         if(!email.isEmpty() && email.length() >= 4 && email.contains("@")
                 && !password.isEmpty() && password.length() >= 6){
-
             userDao.getDatabaseReference().orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String userStr = dataSnapshot.getValue().toString();
-                    String userPassword = userStr.substring(userStr.indexOf(", password=")+11);
+                    String userPassword = userStr.substring(userStr.indexOf("password=")+9);
                     userPassword = userPassword.substring(0,userPassword.indexOf(","));
                     if(password.trim().equalsIgnoreCase(userPassword.trim())) {
                         String userId = userStr.substring(1,userStr.indexOf("="));
