@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,9 +109,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        /*sharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         if(sharedPref != null && sharedPref.getString(sharedpreferences_email,null) != null){
             signIn(sharedPref.getString(sharedpreferences_email,null), sharedPref.getString(sharedpreferences_password,null));
-        }
+        }*/
     }
 }
