@@ -33,18 +33,21 @@ public class ProfilFragment extends Fragment {
     private final String datePattern = "dd.MM.yyyy";
     private final UserDao userDao = new UserDao();
     private User user;
+    private static ProfilFragment fragment;
 
     public ProfilFragment() {}
 
     public static ProfilFragment newInstance() {
-        ProfilFragment fragment = new ProfilFragment();
+        if (fragment == null) {
+            fragment = new ProfilFragment();
+        }
         return fragment;
     }
 
-    public static ProfilFragment newInstance(String param1, String param2) {
-        ProfilFragment fragment = new ProfilFragment();
-        return fragment;
-    }
+    //public static ProfilFragment newInstance(String param1, String param2) {
+     //   ProfilFragment fragment = new ProfilFragment();
+     //   return fragment;
+   // }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

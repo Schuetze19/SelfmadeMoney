@@ -25,11 +25,14 @@ public class MeineAuftrageFragment extends Fragment {
     private ArrayList<Auftrag> laufendeAuftraege = new ArrayList<>();
     private ArrayList<Auftrag> abgeschlosseneAuftraege = new ArrayList<>();
     private String userId = "";
+    private static MeineAuftrageFragment fragment;
 
     public MeineAuftrageFragment() {}
 
     public static MeineAuftrageFragment newInstance() {
-        MeineAuftrageFragment fragment = new MeineAuftrageFragment();
+        if(fragment == null) {
+            fragment = new MeineAuftrageFragment();
+        }
         return fragment;
     }
 

@@ -25,11 +25,14 @@ public class StartseiteFragment extends Fragment {
     private SearchView searchView;
     private final ArrayList<Auftrag> auftragArrayList = new ArrayList<>();
     private final AuftragDao auftragDao = new AuftragDao();
+    private static StartseiteFragment fragment;
 
     public StartseiteFragment() {}
 
     public static StartseiteFragment newInstance() {
-        StartseiteFragment fragment = new StartseiteFragment();
+        if (fragment == null) {
+            fragment = new StartseiteFragment();
+        }
         return fragment;
     }
 

@@ -27,11 +27,14 @@ public class AuftragFragment extends Fragment {
     private AuftragController auftragController = new AuftragController();
     private final int TAGE = 31;
     private String userId = "";
+    private static AuftragFragment fragment;
 
     public AuftragFragment () {}
 
     public static AuftragFragment newInstance() {
-        AuftragFragment fragment = new AuftragFragment();
+        if (fragment == null) {
+            fragment = new AuftragFragment();
+        }
         return fragment;
     }
 

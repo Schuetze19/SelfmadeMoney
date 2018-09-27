@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Weiteres Register Fragment erstellen
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
                 //Felder wie auf der Seite Profil zu sehen sind auch Registrierungsfelder
                 // mAuth.createUserWithEmailAndPassword(txtEmail.getText().toString(), txtPassword.getText().toString());
             }
